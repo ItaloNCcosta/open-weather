@@ -7,4 +7,5 @@
   'maximum temperature' => 'temperatura máxima',
   
   'clear_sky' => 'céu claro',
+  'scattered_clouds' => 'nuvens dispersas'
 ];
