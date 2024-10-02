@@ -30,13 +30,15 @@ class OpenWeatherAdapter implements WeatherServiceInterface
     $response = $client->get($endpoint);
     $data = json_decode($response->getBody()->getContents(), true);
 
+    $description = str_replace(" ", "_", $data['weather'][0]['description']);
+
     return $this->createWeatherService->create([
       'city' => $data['name'],
       'temp' => $data['main']['temp'],
       'temp_min' => $data['main']['temp_min'],
       'temp_max' => $data['main']['temp_max'],
       'weather_main' => $data['weather'][0]['main'],
-      'description' => $data['weather'][0]['description'],
+      'description' => $description,
       'humidity' => $data['main']['humidity'],
       'icon' => $data['weather'][0]['icon'],
       'api' => 'Open Weather'

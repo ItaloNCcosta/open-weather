@@ -17,11 +17,11 @@ class WeatherService
 
   public function showCurrentWeather(string $search): Weather
   {
-    $weather = $this->get($search);
+    // $weather = $this->get($search);
 
-    if ($weather) {
-      return $weather;
-    }
+    // if ($weather) {
+    //   return $weather;
+    // }
 
     return $this->WeatherServiceInterface->getCurrentWeather($search);
   }
