@@ -19,25 +19,4 @@ class CityController extends Controller
 
     return response()->json($cities);
   }
-
-  public function insertCities(): JsonResponse
-  {
-    $url = 'https://servicodados.ibge.gov.br/api/v1/localidades/municipios';
-    $data = file_get_contents($url);
-    $municipalities = json_decode($data, true);
-
-    foreach ($municipalities as $municipality) {
-      $exists = DB::table('cities')->where('id', $municipality['id'])->exists();
-
-      if (!$exists) {
-        DB::table('cities')->insert([
-          'id' => $municipality['id'],
-          'name' => $municipality['nome'],
-          'state_id' => $municipality['microrregiao']['mesorregiao']['UF']['id']
-        ]);
-      }
-    }
-
-    return Response()->json('Inserido com sucesso');
-  }
 }
